@@ -26,10 +26,10 @@ public class CenaEmBranco extends AGScene {
     public void init() {
         //criar uma cena com o fundo amarelo
         this.setSceneBackgroundColor(1, 1, 1);
-        gato = createSprite(R.mipmap.runningcat, 2, 4);
+        gato = createSprite(R.mipmap.run, 5, 2);
         gato.setScreenPercent(30, 20);
-        gato.addAnimation(10, true, 0,1,2,3,4,5,6,7,8);
-        gato.setScreenPercent(60,30);
+        gato.addAnimation(15, true, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        gato.setScreenPercent(60, 40);
         gato.vrPosition.setXY(AGScreenManager.iScreenWidth / 2, AGScreenManager.iScreenHeight - (AGScreenManager.iScreenHeight / 4));
 
     }
@@ -47,44 +47,17 @@ public class CenaEmBranco extends AGScene {
     @Override
     public void loop() {
 
-//        if (AGInputManager.vrTouchEvents.screenClicked())
-//        {
-//            if(vrImagem.collide(AGInputManager.vrTouchEvents.getLastPosition()))
-//            {
-//                vrGameManager.setCurrentScene(1);
-//                return;
-//            }
-//        }
+        gato.vrPosition.setX(gato.vrPosition.getX() + 5);
 
-//        if(estado == 0)
-//        {
-//            if (vrImagem.fadeEnded())
-//            {
-//                vrImagem.fadeOut(3000);
-//                estado = 1;
-//            }
-//        }
-//        else
-//        {
-//            if (vrImagem.fadeEnded())
-//            {
-//               vrGameManager.setCurrentScene(1);
-//                return;
-//            }
-//        }
+        if(gato.vrPosition.getX() > AGScreenManager.iScreenWidth + gato.getSpriteWidth()/2)
+        {
+            gato.vrPosition.setX(-gato.getSpriteWidth()/2);
+        }
 
-//        intervaloTempo.update();
-//
-//        if (intervaloTempo.isTimeEnded())
-//        {
-//            vrGameManager.setCurrentScene(1);
-//            return;
-//        }
-//        if (AGInputManager.vrTouchEvents.screenClicked())
-//        {
-//            vrGameManager.setCurrentScene(1);
-//            return;
-//        }
-//    }
+        if (AGInputManager.vrTouchEvents.screenClicked() || AGInputManager.vrTouchEvents.backButtonClicked())
+        {
+            vrGameManager.setCurrentScene(0);
+            return;
+        }
     }
 }
